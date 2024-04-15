@@ -123,14 +123,48 @@ li:hover {
 }
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
 }
+
+/* filter */
+
+.container-filter-button {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	gap: 10px;
+	padding: 50px;
+}
+
+.container-button {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	border-radius: 60px;
+	border: 1px solid;
+	border-color: #1D6154;
+	padding: 9px 20px;
+	background-color: white;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+	color: #1D6154
+  }
+
+  .container-button:hover {
+	background-color: #1D6154;
+	color: white;
+  }
+
+/* Gallery */
+
 .gallery {
 	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
+
 }
 
 .gallery img {
@@ -185,4 +219,3 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
-
