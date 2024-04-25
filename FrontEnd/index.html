@@ -17,7 +17,7 @@
 		<ul>
 			<li>projets</li>
 			<li>contact</li>
-			<li>login</li>
+			<li><a href="login.html">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -91,14 +91,8 @@
             });
     }
 
-    // Fonction pour mettre à jour la galerie d'images avec les données de l'API
     function updateGalleryWithData(data) {
         const gallery = document.querySelector('#gallery');
-
-        // Efface le contenu actuel de la galerie
-        gallery.innerHTML = '';
-
-        // Parcourt les données de l'API pour créer les nouvelles figures
         data.forEach(item => {
             const figure = document.createElement('figure');
             const img = document.createElement('img');
@@ -117,7 +111,6 @@
         });
     }
 
-    // Fonction pour filtrer les projets par catégorie
     function filterProjects(category) {
         fetchDataFromAPI()
             .then(data => {
@@ -129,8 +122,6 @@
                 }
             });
     }
-
-    // Appel de la fonction pour récupérer les données de l'API et mettre à jour la galerie d'images au chargement de la page
     document.addEventListener('DOMContentLoaded', () => {
         fetchDataFromAPI()
             .then(data => {
@@ -138,7 +129,6 @@
             });
     });
 
-    // Gestion des événements des boutons de filtre
     const filterButtons = document.querySelectorAll('.container-button');
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
