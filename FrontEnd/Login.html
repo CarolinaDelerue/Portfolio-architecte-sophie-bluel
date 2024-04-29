@@ -10,7 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
         rel="stylesheet">
     <meta name="description" content="">
-    <link rel="stylesheet" href="./assets/style.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/login.css">
+
 </head>
 
 <body>
@@ -21,7 +23,7 @@
                 <li>projets</li>
                 <li>contact</li>
                 <li><a href="login.html">login</a></li>
-                <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+                <li><img src="./assets/icons/instagram.png" alt="Instagram" style="width: 22px; height: 22px;" ></li>
             </ul>
         </nav>
     </header>
@@ -40,98 +42,6 @@
             <a href="#">Mot de passe oublié</a>
         </div>
     </main>
+    <script src="./assets/scripts/login.js"></script>
 </body>
-
-<style>
-    h1 {
-        text-align: center;
-        color: #1D6154;
-        font-family: Syne;
-        font-size: 30px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: normal;
-    }
-
-    input {
-        width: 379px;
-        height: 30px;
-        flex-shrink: 0;
-        background: #FFF;
-        box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
-        border: none;
-        outline: none;
-    }
-
-    button {
-        width: 179px;
-        height: 36px;
-        flex-shrink: 0;
-        border-radius: 60px;
-        background: #1D6154;
-        outline: none;
-        border: none;
-        color: white;
-    }
-
-    a {
-        color: #3D3D3D;
-        font-family: "Work Sans";
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: normal;
-        text-decoration-line: underline;
-    }
-
-    .container-login {
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
-        align-items: center;
-        margin-top: 150px;
-    }
-
-    .container-input {
-        display: flex;
-        flex-direction: column;
-        gap: 7px;
-
-
-    }
-</style>
-
-<script>
-    document.getElementById('loginBtn').addEventListener('click', function() {
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('mdp').value;
-
-        fetch('http://localhost:5678/api/users/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email: email, password: password })
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Échec de la connexion');
-            }
-            return response.json();
-        })
-        .then(data => {
-    // Vérifier si la connexion a réussi
-    if (data.userId && data.token) {
-        // Stocker le token dans le stockage local
-        localStorage.setItem('userId', data.userId);
-        localStorage.setItem('token', data.token);
-
-        // Rediriger vers la page d'accueil
-        window.location.href = "index.html";
-    } else {
-        // Afficher un message d'erreur
-        alert("La combinaison utilisateur-mot de passe est incorrecte.");
-    }
-})
-    });
-</script>
+</html>
