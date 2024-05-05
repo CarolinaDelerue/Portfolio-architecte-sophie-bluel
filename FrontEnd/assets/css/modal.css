@@ -1,0 +1,117 @@
+/* Modal */
+.container-title-cross {
+  display: flex;
+  flex-direction: row;
+}
+
+.container-modal {
+  background-color: black;
+  height: 59px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.container-modal button {
+  color: #fff;
+  text-align: center;
+  font-family: "Work Sans";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  border: none;
+  background-color: none;
+}
+
+.container-button-modal {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.modal {
+  position: fixed;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.titlemodal {
+  color: #000;
+  text-align: center;
+  font-family: "Work Sans";
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 46px;
+  margin-top: 30px;
+}
+
+.modal-wrapper {
+  overflow: auto;
+  background-color: #fff;
+  max-width: calc(100vw - 20px);
+  max-height: calc(100vh - 20px);
+  width: 630px;
+  padding: 20px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+}
+
+.js-modal-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.close-icon {
+  font-size: 20px; /* Taille de la croix */
+  color: #555; /* Couleur de la croix */
+  position: absolute; /* Position absolue par rapport à la modale */
+  top: 10px; /* Espacement du haut de la modale */
+  right: 10px; /* Espacement de la droite de la modale */
+}
+
+.modal-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 25px;
+}
+
+.modal-content img {
+  width: 79px;
+  height: 104px;
+  margin-right: 4px;
+}
+
+.separator {
+  border-top: 1px solid #ccc;
+  margin-top: 67px;
+  margin-bottom: 38px;
+
+}
+.container-button-add {
+  display: flex;
+  justify-content: center;
+}
+.button-add {
+  border-radius: 60px;
+  background-color: #1d6154;
+  color: white;
+  padding: 10px 10px;
+}

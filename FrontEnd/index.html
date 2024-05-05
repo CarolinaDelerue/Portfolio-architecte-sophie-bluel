@@ -11,23 +11,32 @@
 		rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/css/style.css">
+	<link rel="stylesheet" href="./assets/css/modal.css">
 </head>
 
 <body>
 
-	<a href="#modal1" class="js-modal">Ouvrir la boite modale</a>
-	<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-modal="false">
-		<div class="modal-wrapper js-modal-stop">
-			<button class="js-modal-close">Fermer la boite modale</button>
-			<h1 id="titlemodal" aria-labelledby="titlemodal" style="display:none;">Galerie photo</h1>
-			<p>blabla</p>
-			<p>blabla</p>
-			<p>blabla</p>
-			<p>blabla</p>
-			<p>blabla</p>
+	<div class="container-modal">
+		<div class="container-button-modal">
+			<img src="./assets/icons/modify-white.png" alt="modify button">
+			<button href="#modal1" class="js-modal">Mode édition</button>
 		</div>
-	</aside>
+		<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-modal="false">
+			<div class="modal-wrapper js-modal-stop">
+				<h1 class="titlemodal" id="titlemodal" aria-labelledby="titlemodal">Galerie photo</h1>
+				<button class="js-modal-close">
+					<span class="close-icon">&#10006;</span>
+					<!-- Utilisation de l'entité HTML pour le symbole de croix -->
+				</button>
+				<div class="modal-content"></div>
+				<div class="separator"></div>
+				<div class="container-button-add">
+					<button class="button-add">Ajouter une photo</button>
+				</div>
 
+			</div>
+		</aside>
+	</div>
 
 	<header>
 		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
@@ -57,7 +66,11 @@
 			</article>
 		</section>
 		<section id="portfolio">
-			<h2>Mes Projets</h2>
+			<div>
+				<h2>Mes Projets</h2>
+				<img src="./assets/icons/modify-black.png" alt="modify button">
+				<p>modifier</p>
+			</div>
 			<div class="container-filter-button">
 				<button class="container-button">
 					Tous
@@ -102,4 +115,5 @@
 	<script src="./assets/scripts/modal.js"></script>
 
 </body>
+
 </html>
