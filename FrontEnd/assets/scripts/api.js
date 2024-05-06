@@ -70,3 +70,19 @@
             filterProjects(category);
         });
     });
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const userToken = localStorage.getItem('token')
+
+        const banner = document.getElementById('banner')
+        const isLogged = document.getElementById('update-button')
+
+        if (!userToken) {
+            banner.style.display = 'none'
+            isLogged.style.display = 'none'
+        } else {
+            banner.style.display = 'flex'
+            isLogged.style.display = 'flex'
+        }
+    })

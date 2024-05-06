@@ -93,10 +93,22 @@
   gap: 25px;
 }
 
-.modal-content img {
+.modal-content > div {
+  position: relative;
+}
+
+.modal-content > div > button {
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  background-color: black;
+}
+
+.modal-content > div > img {
   width: 79px;
   height: 104px;
   margin-right: 4px;
+  position: relative;
 }
 
 .separator {
@@ -114,4 +126,10 @@
   background-color: #1d6154;
   color: white;
   padding: 10px 10px;
+}
+
+.modify-projet {
+  display: flex;
+  flex-direction: row;
+  background-color: black;
 }

@@ -218,7 +218,19 @@ li:hover {
   text-align: center;
 }
 
+#portfolio > .update-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+}
 
+#portfolio > .update-button > div {
+  display: flex;
+  gap: 8px;
+}
 /* filter */
 
 .container-filter-button {

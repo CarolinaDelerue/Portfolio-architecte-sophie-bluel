@@ -23,6 +23,8 @@ const closeModal = function (e) {
   modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation)
 }
 
+
+
 const stopPropagation = function (e) {
   e.stopPropagation()
 }
@@ -37,27 +39,60 @@ function displayImagesFromAPI () {
   fetch('http://localhost:5678/api/works')
     .then(response => {
       if (!response.ok) {
-        throw new Error('Échec de la récupération des données.')
+        throw new Error('Échec de la récupération des données.');
       }
-      return response.json()
+      return response.json();
     })
     .then(data => {
       // Récupérer le conteneur dans le modal où vous souhaitez afficher les images
-      const modalContent = document.querySelector('.modal-content')
+      const modalContent = document.querySelector('.modal-content');
+
+      // Vider le contenu actuel de la modal
+      modalContent.innerHTML = '';
 
       // Parcourir les données de l'API pour créer les éléments d'image et les ajouter au modal
       data.forEach(imageData => {
-        const img = document.createElement('img')
-        img.src = imageData.imageUrl
-        img.alt = imageData.title
+        const imgContainer = document.createElement('div');
+
+        const img = document.createElement('img');
+        img.src = imageData.imageUrl;
+        img.alt = imageData.title;
+        img.id = imageData.id;
+
+        const trash = document.createElement('button')
+        const icon = document.createElement('img')
+        icon.src = './assets/icons/trash.svg'
 
         // Ajouter l'image au conteneur du modal
-        modalContent.appendChild(img)
-      })
+        imgContainer.appendChild(img)
+        imgContainer.appendChild(trash);
+        trash.appendChild(icon);
+
+        modalContent.appendChild(imgContainer);
+
+        trash.addEventListener('click', () => deleteImg())
+
+      });
     })
     .catch(error => {
-      console.error('Erreur:', error)
-    })
+      console.error('Erreur:', error);
+    });
+}
+
+function deleteImg(id) {
+  fetch(`http://localhost:5678/api/works/${id}`, {
+    method: 'DELETE'
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Échec de la suppression de l\'image.');
+    }
+    // Mettez à jour l'affichage des images après la suppression
+    displayImagesFromAPI();
+  })
+  .catch(error => {
+    console.error('Erreur lors de la suppression de l\'image:', error);
+  });
 }
 
 // Appeler la fonction pour afficher les images une fois que le modal est ouvert

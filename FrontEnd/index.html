@@ -15,8 +15,7 @@
 </head>
 
 <body>
-
-	<div class="container-modal">
+	<div class="container-modal" id="banner">
 		<div class="container-button-modal">
 			<img src="./assets/icons/modify-white.png" alt="modify button">
 			<button href="#modal1" class="js-modal">Mode édition</button>
@@ -26,14 +25,12 @@
 				<h1 class="titlemodal" id="titlemodal" aria-labelledby="titlemodal">Galerie photo</h1>
 				<button class="js-modal-close">
 					<span class="close-icon">&#10006;</span>
-					<!-- Utilisation de l'entité HTML pour le symbole de croix -->
 				</button>
 				<div class="modal-content"></div>
 				<div class="separator"></div>
 				<div class="container-button-add">
 					<button class="button-add">Ajouter une photo</button>
 				</div>
-
 			</div>
 		</aside>
 	</div>
@@ -66,11 +63,16 @@
 			</article>
 		</section>
 		<section id="portfolio">
-			<div>
+
+			<div class="update-button" id="update-button">
 				<h2>Mes Projets</h2>
-				<img src="./assets/icons/modify-black.png" alt="modify button">
-				<p>modifier</p>
+				<div>
+					<img src="./assets/icons/modify-black.png" alt="modify button">
+					<p>modifier</p>
+				</div>
 			</div>
+
+
 			<div class="container-filter-button">
 				<button class="container-button">
 					Tous
