@@ -22,8 +22,8 @@
             <ul>
                 <li>projets</li>
                 <li>contact</li>
-                <li><a href="login.html">login</a></li>
-                <li><img src="./assets/icons/instagram.png" alt="Instagram" style="width: 22px; height: 22px;" ></li>
+                <li><a id="loginLogoutLink" href="login.html">login</a></li>
+                <li><img src="./assets/icons/instagram.png" alt="Instagram" style="width: 22px; height: 22px;"></li>
             </ul>
         </nav>
     </header>
@@ -38,7 +38,7 @@
                 <label for="email">Mot de passe</label>
                 <input type="password" id="mdp"required>
             </div>
-            <button id="loginBtn">Se connecter</button>
+            <button id="loginBtn" onclick="login()">Se connecter</button>
             <a href="#">Mot de passe oublié</a>
         </div>
     </main>
