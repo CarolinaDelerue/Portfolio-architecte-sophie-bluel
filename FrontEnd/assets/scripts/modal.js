@@ -70,7 +70,7 @@ function displayImagesFromAPI () {
 
         modalContent.appendChild(imgContainer);
 
-        trash.addEventListener('click', () => deleteImg())
+        trash.addEventListener('click', () => deleteImg(imageData.id))
 
       });
     })
@@ -81,6 +81,10 @@ function displayImagesFromAPI () {
 
 function deleteImg(id) {
   fetch(`http://localhost:5678/api/works/${id}`, {
+    //suppression de l'image via token session
+    headers: {
+      'Authorization' : `Bearer ${localStorage.getItem('token')}`
+    },
     method: 'DELETE'
   })
   .then(response => {
@@ -93,6 +97,8 @@ function deleteImg(id) {
   .catch(error => {
     console.error('Erreur lors de la suppression de l\'image:', error);
   });
+
+
 }
 
 // Appeler la fonction pour afficher les images une fois que le modal est ouvert
