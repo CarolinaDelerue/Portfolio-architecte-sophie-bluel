@@ -1,4 +1,20 @@
 /* Modal */
+
+
+input {
+  background-color: #fff;
+  box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
+  border: none;
+  height: 30px;
+}
+
+select {
+  background-color: #fff;
+  box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
+  border: none;
+  height: 30px;
+}
+
 .container-title-cross {
   display: flex;
   flex-direction: row;
@@ -21,7 +37,17 @@
   font-weight: 400;
   line-height: normal;
   border: none;
-  background-color: none;
+  background-color: transparent;
+}
+
+#addPhotoButton {
+  color: white;
+  background: #1d6154;
+  border-radius: 60px;
+  padding: 6px 14px;
+  font-family: Syne;
+  font-size: 14px;
+  font-style: normal;
 }
 
 .container-button-modal {
@@ -109,18 +135,20 @@
   height: 104px;
   margin-right: 4px;
   position: relative;
+  object-fit: cover;
 }
 
 .separator {
   border-top: 1px solid #ccc;
   margin-top: 67px;
   margin-bottom: 38px;
-
 }
+
 .container-button-add {
   display: flex;
   justify-content: center;
 }
+
 .button-add {
   border-radius: 60px;
   background-color: #1d6154;
@@ -133,3 +161,52 @@
   flex-direction: row;
   background-color: black;
 }
+
+#uploadForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.container-preview {
+  width: 420px;
+  height: 169px;
+  flex-shrink: 0;
+  border-radius: 3px;
+  background-color: #e8f1f6;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding-top: 16px;
+  padding-bottom: 18px;
+}
+
+.addImgButton {
+  border-radius: 50px;
+  background: #cbd6dc;
+  padding: 6px 10px;
+  display: flex;
+}
+
+.uploadButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#uploadButton {
+  border-radius: 60px;
+  background-color: #a7a7a7;
+  color: white;
+  padding: 6px 10px;
+  width: 237px;
+  height: 36px;
+  border: none;
+  text-align: center;
+}
+
+/* #imagePreview {
+  padding-top: 16px;
+} */

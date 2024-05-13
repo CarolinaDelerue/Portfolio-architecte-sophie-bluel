@@ -273,7 +273,10 @@ li:hover {
 }
 
 .gallery img {
-  width: 100%;
+  /* width: 100%; */
+  width: 307px;
+  height: 430px;
+  object-fit: cover;
 }
 
 #contact {
