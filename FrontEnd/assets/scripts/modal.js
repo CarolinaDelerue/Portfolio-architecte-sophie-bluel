@@ -35,49 +35,45 @@ document.querySelectorAll('.js-modal').forEach(a => {
 
 
 // Effectuer un appel API et afficher les images dans le modal
-function displayImagesFromAPI () {
+function displayImagesFromAPI() {
   fetch('http://localhost:5678/api/works')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Échec de la récupération des données.');
-      }
-      return response.json();
-    })
-    .then(data => {
-      // Récupérer le conteneur dans le modal où vous souhaitez afficher les images
-      const modalContent = document.querySelector('.modal-content');
+      .then(response => {
+          if (!response.ok) {
+              throw new Error('Échec de la récupération des données.');
+          }
+          return response.json();
+      })
+      .then(data => {
+          const modalContent = document.querySelector('.modal-content');
+          modalContent.innerHTML = ''; // Clear existing content
 
-      // Vider le contenu actuel de la modal
-      modalContent.innerHTML = '';
+          data.forEach(imageData => {
+              const imgContainer = document.createElement('div');
+              const img = document.createElement('img');
+              img.src = imageData.imageUrl; // Utilisez l'URL de l'image provenant de l'API
 
-      // Parcourir les données de l'API pour créer les éléments d'image et les ajouter au modal
-      data.forEach(imageData => {
-        const imgContainer = document.createElement('div');
+              // Autres attributs de l'image comme l'ID, l'alt, etc.
+              img.alt = imageData.title;
+              img.id = imageData.id;
 
-        const img = document.createElement('img');
-        img.src = imageData.imageUrl;
-        img.alt = imageData.title;
-        img.id = imageData.id;
+              const trash = document.createElement('button');
+              const icon = document.createElement('img');
+              icon.src = './assets/icons/trash.svg';
 
-        const trash = document.createElement('button')
-        const icon = document.createElement('img')
-        icon.src = './assets/icons/trash.svg'
+              // Ajouter l'image au conteneur du modal
+              imgContainer.appendChild(img);
+              imgContainer.appendChild(trash);
+              trash.appendChild(icon);
+              modalContent.appendChild(imgContainer);
 
-        // Ajouter l'image au conteneur du modal
-        imgContainer.appendChild(img)
-        imgContainer.appendChild(trash);
-        trash.appendChild(icon);
-
-        modalContent.appendChild(imgContainer);
-
-        trash.addEventListener('click', () => deleteImg(imageData.id))
-
+              trash.addEventListener('click', () => deleteImg(imageData.id));
+          });
+      })
+      .catch(error => {
+          console.error('Erreur:', error);
       });
-    })
-    .catch(error => {
-      console.error('Erreur:', error);
-    });
 }
+
 
 function deleteImg(id) {
   fetch(`http://localhost:5678/api/works/${id}`, {
@@ -116,3 +112,65 @@ document.addEventListener('DOMContentLoaded', () => {
     displayImagesFromAPI()
   })
 })
+
+
+
+// Fonction pour ouvrir le modal 2
+const openModal2 = function (e) {
+  e.preventDefault();
+  const target = document.querySelector(e.target.getAttribute('href'));
+  target.style.display = "flex";
+  target.removeAttribute('aria-hidden');
+  target.setAttribute('aria-modal', 'true');
+};
+
+// Fonction pour fermer le modal 2
+const closeModal2 = function (e) {
+  const modal2 = document.getElementById('modal2');
+  modal2.style.display = "none";
+};
+
+// Fonction pour empêcher la propagation de l'événement
+const stopPropagation2 = function (e) {
+  e.stopPropagation();
+};
+
+// Sélectionnez tous les boutons "Ajouter une photo" et ajoutez un écouteur d'événements pour ouvrir le modal 2
+document.querySelectorAll('.js-modal2').forEach(button => {
+  button.addEventListener('click', openModal2);
+});
+
+// Soumission du formulaire d'ajout de photo
+document.getElementById('uploadForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+
+  // Récupération des données du formulaire
+  const formData = new FormData(this);
+
+  console.log('formData', formData)
+
+  // Envoi des données au serveur
+  fetch('http://localhost:5678/api/works', {
+    method: 'POST',
+    body: formData,
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    }
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Échec de l\'ajout de l\'image.');
+    }
+    // Mettre à jour l'affichage des images après l'ajout
+    displayImagesFromAPI();
+    // Fermer le modal 2
+    closeModal2(e);
+  })
+  .then(data => {
+    // Ajoutez un console.log pour afficher les données envoyées en base
+    console.log('Données envoyées en base:', formData);
+  })
+  .catch(error => {
+    console.error('Erreur lors de l\'ajout de l\'image:', error);
+  });
+});
