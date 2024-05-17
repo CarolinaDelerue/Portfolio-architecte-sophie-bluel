@@ -164,16 +164,25 @@ const imagePreview = document.getElementById('imagePreview')
 imageInput.addEventListener('change', function () {
   // Vérifier si un fichier a été sélectionné
   if (this.files && this.files[0]) {
-    const reader = new FileReader()
+    const file = this.files[0]
+    const fileType = file.type
 
-    // Lorsque le fichier est chargé, mettre à jour l'aperçu de l'image
-    reader.onload = function (e) {
-      imagePreview.src = e.target.result
-      imagePreview.style.display = 'block'
+    // Vérifier le type de fichier
+    if (fileType === 'image/jpeg' || fileType === 'image/png') {
+      const reader = new FileReader()
+
+      // Lorsque le fichier est chargé, mettre à jour l'aperçu de l'image
+      reader.onload = function (e) {
+        imagePreview.src = e.target.result
+        imagePreview.style.display = 'block'
+      }
+
+      // Lire le fichier en tant que URL de données
+      reader.readAsDataURL(file)
+    } else {
+      alert('Veuillez sélectionner une image au format JPG ou PNG.')
+      imageInput.value = '' // Réinitialiser l'input file
     }
-
-    // Lire le fichier en tant que URL de données
-    reader.readAsDataURL(this.files[0])
   }
 })
 
