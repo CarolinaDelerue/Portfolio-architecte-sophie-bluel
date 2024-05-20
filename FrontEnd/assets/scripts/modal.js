@@ -71,6 +71,7 @@ uploadForm.addEventListener('submit', function (e) {
       // Mettez à jour l'affichage des images après l'ajout
       displayImagesFromAPI()
       closeModal2() // Fermer le modal après l'ajout
+      validateButton.classList.add('active-button') // Rendre le bouton rouge
     })
     .catch(error => {
       console.error('Erreur lors de l\'ajout de l\'image:', error)
@@ -90,6 +91,8 @@ const imagePreview = document.getElementById('imagePreview')
 const imagePreviewLabel = document.querySelector('.imagePreviewLabel')
 // Sélectionner l'élément <p> pour le texte du format
 const formatText = document.getElementById('formatText')
+// Sélectionner le bouton "Valider"
+const validateButton = document.getElementById('uploadButton') // Utiliser l'ID du bouton
 
 // Ajouter un écouteur d'événements pour le changement de fichier
 imageInput.addEventListener('change', function () {
@@ -98,7 +101,8 @@ imageInput.addEventListener('change', function () {
     const file = this.files[0]
     const fileType = file.type
 
-    // Vérifier le type de fichier
+    // Vérifier le type de fichier demandé
+    // TODO: inverser la négation + ajouter le taille max
     if (fileType === 'image/jpeg' || fileType === 'image/png') {
       const reader = new FileReader()
 
@@ -106,15 +110,16 @@ imageInput.addEventListener('change', function () {
       reader.onload = function (e) {
         imagePreview.src = e.target.result
         imagePreview.style.display = 'block'
-        imagePreviewLabel.style.display = 'none' // Masquer le label
-        formatText.style.display = 'none' // Masquer le texte des formats autorisés
+        imagePreviewLabel.style.display = 'none'
+        formatText.style.display = 'none'
+        validateButton.classList.add('active')
       }
 
       // Lire le fichier en tant que URL de données
       reader.readAsDataURL(file)
     } else {
       alert('Veuillez sélectionner une image au format JPG ou PNG.')
-      imageInput.value = '' // Réinitialiser l'input file
+      imageInput.value = ''
     }
   }
 })

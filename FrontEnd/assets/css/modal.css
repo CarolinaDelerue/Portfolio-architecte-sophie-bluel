@@ -228,13 +228,18 @@ select {
   align-items: center;
 }
 
+/* Style du bouton par défaut */
 #uploadButton {
-  border-radius: 60px;
-  background-color: #a7a7a7;
+  background-color: gray;
   color: white;
-  padding: 6px 10px;
-  width: 237px;
-  height: 36px;
   border: none;
-  text-align: center;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: not-allowed; /* Désactiver le curseur pour l'état initial */
+}
+
+/* Style du bouton lorsqu'une image est téléchargée */
+#uploadButton.active {
+  background-color: #1d6154;
+  cursor: pointer; /* Changer le curseur pour pointer lorsqu'il est actif */
 }
