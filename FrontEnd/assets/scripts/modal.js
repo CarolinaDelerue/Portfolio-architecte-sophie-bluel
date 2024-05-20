@@ -100,29 +100,35 @@ imageInput.addEventListener('change', function () {
   if (this.files && this.files[0]) {
     const file = this.files[0]
     const fileType = file.type
+    const fileSize = file.size
 
-    // Vérifier le type de fichier demandé
-    // TODO: inverser la négation + ajouter le taille max
-    if (fileType === 'image/jpeg' || fileType === 'image/png') {
-      const reader = new FileReader()
+    // Vérifier le type de fichier et la taille maximale (4 Mo)
+    if (['image/jpeg', 'image/png'].includes(fileType)) {
+      if (fileSize <= 4 * 1024 * 1024) { // 4 MB in bytes
+        const reader = new FileReader()
 
-      // Lorsque le fichier est chargé, mettre à jour l'aperçu de l'image
-      reader.onload = function (e) {
-        imagePreview.src = e.target.result
-        imagePreview.style.display = 'block'
-        imagePreviewLabel.style.display = 'none'
-        formatText.style.display = 'none'
-        validateButton.classList.add('active')
+        // Lorsque le fichier est chargé, mettre à jour l'aperçu de l'image
+        reader.onload = function (e) {
+          imagePreview.src = e.target.result
+          imagePreview.style.display = 'block'
+          imagePreviewLabel.style.display = 'none'
+          formatText.style.display = 'none'
+          validateButton.classList.add('active')
+        }
+
+        // Lire le fichier en tant que URL de données
+        reader.readAsDataURL(file)
+      } else {
+        alert('Le fichier ne doit pas dépasser 4 Mo.')
+        imageInput.value = ''
       }
-
-      // Lire le fichier en tant que URL de données
-      reader.readAsDataURL(file)
     } else {
       alert('Veuillez sélectionner une image au format JPG ou PNG.')
       imageInput.value = ''
     }
   }
 })
+
 
 // Sélectionner l'icône de croix dans le modal 2
 const closeIconModal2 = document.querySelector('#modal2 .js-modal-close')

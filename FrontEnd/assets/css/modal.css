@@ -23,6 +23,10 @@ select {
   background-color: black;
   height: 59px;
   display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
   justify-content: center;
   gap: 12px;
 }
