@@ -14,7 +14,6 @@
 	<link rel="stylesheet" href="./assets/css/modal.css">
 </head>
 
-
 <body>
 	<div class="container-modal" id="banner">
 		<div class="container-button-modal">
@@ -45,18 +44,17 @@
 			</button>
 			<div class="modal-content">
 				<form id="uploadForm" enctype="multipart/form-data">
-
 					<div class="container-preview">
 						<!-- Ajout de l'image d'aperçu -->
 						<img id="imagePreview" src="./assets/icons/placeholder-img.svg" alt="Image Preview"
-							style=" max-width: 100px; max-height: 100px;">
+							style="width: 129px; height: 193px; object-fit: cover;">
 						<label class="imagePreviewLabel">
 							<span>+ Ajouter photo</span>
 							<input class="addImgButton" type="file" id="image" name="image" accept="image/*" required
 								placeholder="">
 						</label>
 						<!-- Ajout du texte indiquant les formats autorisés et la taille maximale -->
-						<p>Formats autorisés : jpg, png. Taille maximale : 4 Mo</p>
+						<p id="formatText">Formats autorisés : jpg, png. Taille maximale : 4 Mo</p>
 					</div>
 					<label for="title">Titre</label>
 					<input type="text" id="title" name="title" required>
@@ -92,8 +90,7 @@
 			</figure>
 			<article>
 				<h2>Designer d'espace</h2>
-				<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la
-					livraison
+				<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison
 					finale du chantier.</p>
 				<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les
 					couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du
@@ -125,7 +122,7 @@
 				<label for="name">Nom</label>
 				<input type="text" name="name" id="name">
 				<label for="email">Email</label>
-				<input type="email" name="email" id="email">
+				<input type="email name=" email" id="email">
 				<label for="message">Message</label>
 				<textarea name="message" id="message" cols="30" rows="10"></textarea>
 				<div class="container-sendButton">

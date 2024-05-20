@@ -1,35 +1,191 @@
-let modal = document.getElementById('modal1')
-
+// Fonction pour ouvrir le modal 1
 const openModal = function (e) {
   e.preventDefault()
   const target = document.querySelector(e.target.getAttribute('href'))
-  target.style.display = "flex"
+  target.style.display = 'flex'
   target.removeAttribute('aria-hidden')
   target.setAttribute('aria-modal', 'true')
-  modal.addEventListener('click', closeModal)
-  modal.querySelector('.js-modal-close').addEventListener('click', closeModal)
-  modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
-  displayImagesFromAPI() // Appeler la fonction pour afficher les images de l'API
+  displayImagesFromAPI() // Afficher les images actuelles
 }
 
+// Fonction pour fermer le modal 1
 const closeModal = function (e) {
-  if (window.getComputedStyle(modal).display === 'none') return
-  e.preventDefault()
-  modal.style.display = "none"
-  modal.setAttribute('aria-hidden', 'true')
-  modal.removeAttribute('aria-modal')
-  modal.removeEventListener('click', closeModal)
-  modal.querySelector('.js-modal-close').removeEventListener('click', closeModal)
-  modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation)
+  const modal1 = document.getElementById('modal1')
+  modal1.style.display = 'none'
+  modal1.setAttribute('aria-hidden', 'true')
+  modal1.removeAttribute('aria-modal')
 }
 
+// Ajouter un écouteur d'événements pour le clic sur le bouton "Modifier"
+document.querySelectorAll('.js-modal').forEach(a => {
+  a.addEventListener('click', openModal)
+})
+
+// Sélectionner l'icône de croix dans le modal 1
+const closeIconModal1 = document.querySelector('#modal1 .js-modal-close')
+
+// Ajouter un écouteur d'événements pour le clic sur l'icône de croix dans le modal 1
+closeIconModal1.addEventListener('click', closeModal)
+
+// Sélectionner l'élément modal 2
+const modal2 = document.getElementById('modal2')
+
+// Fonction pour ouvrir le modal 2
+const openModal2 = function (e) {
+  e.preventDefault()
+  modal2.style.display = 'flex'
+  modal2.removeAttribute('aria-hidden')
+  modal2.setAttribute('aria-modal', 'true')
+}
+
+// Fonction pour fermer le modal 2
+const closeModal2 = function () {
+  modal2.style.display = 'none'
+}
+
+// Ajouter un écouteur d'événements pour le clic sur le bouton "Ajouter une photo"
+document.querySelectorAll('.js-modal2').forEach(button => {
+  button.addEventListener('click', openModal2)
+})
+
+// Sélectionner le formulaire d'ajout de photo
+const uploadForm = document.getElementById('uploadForm')
+
+// Ajouter un gestionnaire d'événements pour le soumission du formulaire
+uploadForm.addEventListener('submit', function (e) {
+  e.preventDefault() // Empêcher le comportement par défaut du formulaire
+
+  const formData = new FormData(this) // Récupérer les données du formulaire
+
+  fetch('http://localhost:5678/api/works', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    },
+    body: formData
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Échec de l\'ajout de l\'image.')
+      }
+      // Mettez à jour l'affichage des images après l'ajout
+      displayImagesFromAPI()
+      closeModal2() // Fermer le modal après l'ajout
+    })
+    .catch(error => {
+      console.error('Erreur lors de l\'ajout de l\'image:', error)
+    })
+})
+
+// Fonction pour empêcher la propagation de l'événement
 const stopPropagation = function (e) {
   e.stopPropagation()
 }
 
-document.querySelectorAll('.js-modal').forEach(a => {
-  a.addEventListener('click', openModal)
+// Sélectionner l'élément input de type fichier
+const imageInput = document.getElementById('image')
+// Sélectionner l'élément img pour l'aperçu de l'image
+const imagePreview = document.getElementById('imagePreview')
+// Sélectionner le label pour le bouton d'ajout d'image
+const imagePreviewLabel = document.querySelector('.imagePreviewLabel')
+// Sélectionner l'élément <p> pour le texte du format
+const formatText = document.getElementById('formatText')
+
+// Ajouter un écouteur d'événements pour le changement de fichier
+imageInput.addEventListener('change', function () {
+  // Vérifier si un fichier a été sélectionné
+  if (this.files && this.files[0]) {
+    const file = this.files[0]
+    const fileType = file.type
+
+    // Vérifier le type de fichier
+    if (fileType === 'image/jpeg' || fileType === 'image/png') {
+      const reader = new FileReader()
+
+      // Lorsque le fichier est chargé, mettre à jour l'aperçu de l'image
+      reader.onload = function (e) {
+        imagePreview.src = e.target.result
+        imagePreview.style.display = 'block'
+        imagePreviewLabel.style.display = 'none' // Masquer le label
+        formatText.style.display = 'none' // Masquer le texte des formats autorisés
+      }
+
+      // Lire le fichier en tant que URL de données
+      reader.readAsDataURL(file)
+    } else {
+      alert('Veuillez sélectionner une image au format JPG ou PNG.')
+      imageInput.value = '' // Réinitialiser l'input file
+    }
+  }
 })
+
+// Sélectionner l'icône de croix dans le modal 2
+const closeIconModal2 = document.querySelector('#modal2 .js-modal-close')
+
+// Ajouter un écouteur d'événements pour le clic sur l'icône de croix dans le modal 2
+closeIconModal2.addEventListener('click', closeModal2)
+
+// Sélectionner l'élément .modal-content pour afficher les images dans le modal 1
+const modalContent = document.querySelector('#modal1 .modal-content')
+
+// Effectuer un appel API et afficher les images dans le modal 1
+function displayImagesFromAPI () {
+  fetch('http://localhost:5678/api/works')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Échec de la récupération des données.')
+      }
+      return response.json()
+    })
+    .then(data => {
+      modalContent.innerHTML = '' // Vider le contenu existant
+
+      data.forEach(imageData => {
+        const imgContainer = document.createElement('div')
+        const img = document.createElement('img')
+        img.src = imageData.imageUrl // Utilisez l'URL de l'image provenant de l'API
+        img.alt = imageData.title
+        img.id = imageData.id
+
+        const trash = document.createElement('button')
+        const icon = document.createElement('img')
+        icon.src = './assets/icons/trash.svg'
+
+        trash.appendChild(icon)
+
+        // Ajouter l'image et l'icône de suppression au conteneur du modal
+        imgContainer.appendChild(img)
+        imgContainer.appendChild(trash)
+        modalContent.appendChild(imgContainer)
+
+        // Ajouter un écouteur d'événements pour la suppression d'image
+        trash.addEventListener('click', () => deleteImg(imageData.id))
+      })
+    })
+    .catch(error => {
+      console.error('Erreur:', error)
+    })
+}
+
+// Fonction pour supprimer une image
+function deleteImg (id) {
+  fetch(`http://localhost:5678/api/works/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    }
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Échec de la suppression de l\'image.')
+      }
+      // Mettez à jour l'affichage des images après la suppression
+      displayImagesFromAPI()
+    })
+    .catch(error => {
+      console.error('Erreur lors de la suppression de l\'image:', error)
+    })
+}
 
 // Récupérer les catégories depuis l'API
 function fetchCategories () {
@@ -67,126 +223,6 @@ function displayCategories (categories) {
 // Appeler la fonction pour récupérer les catégories et les afficher dans le menu déroulant
 fetchCategories()
   .then(categories => displayCategories(categories))
-  .catch(error => console.error('Erreur:', error))
-
-// Effectuer un appel API et afficher les images dans le modal
-function displayImagesFromAPI () {
-  fetch('http://localhost:5678/api/works')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Échec de la récupération des données.')
-      }
-      return response.json()
-    })
-    .then(data => {
-      const modalContent = document.querySelector('.modal-content')
-      modalContent.innerHTML = '' // Clear existing content
-
-      data.forEach(imageData => {
-        const imgContainer = document.createElement('div')
-        const img = document.createElement('img')
-        img.src = imageData.imageUrl // Utilisez l'URL de l'image provenant de l'API
-
-        // Autres attributs de l'image comme l'ID, l'alt, etc.
-        img.alt = imageData.title
-        img.id = imageData.id
-
-        const trash = document.createElement('button')
-        const icon = document.createElement('img')
-        icon.src = './assets/icons/trash.svg'
-
-        // Ajouter l'image au conteneur du modal
-        imgContainer.appendChild(img)
-        imgContainer.appendChild(trash)
-        trash.appendChild(icon)
-        modalContent.appendChild(imgContainer)
-
-        trash.addEventListener('click', () => deleteImg(imageData.id))
-      })
-    })
-    .catch(error => {
-      console.error('Erreur:', error)
-    })
-}
-
-function deleteImg (id) {
-  fetch(`http://localhost:5678/api/works/${id}`, {
-    // Suppression de l'image via token session
-    headers: {
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
-    },
-    method: 'DELETE'
+  .catch(error => {
+    console.error('Erreur:', error)
   })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Échec de la suppression de l\'image.')
-      }
-      // Mettez à jour l'affichage des images après la suppression
-      displayImagesFromAPI()
-    })
-    .catch(error => {
-      console.error('Erreur lors de la suppression de l\'image:', error)
-    })
-}
-
-// Fonction pour ouvrir le modal 2
-const openModal2 = function (e) {
-  e.preventDefault()
-  const target = document.querySelector(e.target.getAttribute('href'))
-  target.style.display = "flex"
-  target.removeAttribute('aria-hidden')
-  target.setAttribute('aria-modal', 'true')
-}
-
-// Fonction pour fermer le modal 2
-const closeModal2 = function (e) {
-  const modal2 = document.getElementById('modal2')
-  modal2.style.display = "none"
-}
-
-// Sélectionner l'icône de croix dans le modal 2
-const closeIconModal2 = document.querySelector('#modal2 .js-modal-close')
-
-// Ajouter un écouteur d'événements pour le clic sur l'icône de croix
-closeIconModal2.addEventListener('click', closeModal2)
-
-// Fonction pour empêcher la propagation de l'événement
-const stopPropagation2 = function (e) {
-  e.stopPropagation()
-}
-
-// Sélectionner l'élément input de type fichier
-const imageInput = document.getElementById('image')
-// Sélectionner l'élément img pour l'aperçu de l'image
-const imagePreview = document.getElementById('imagePreview')
-
-// Ajouter un écouteur d'événements pour le changement de fichier
-imageInput.addEventListener('change', function () {
-  // Vérifier si un fichier a été sélectionné
-  if (this.files && this.files[0]) {
-    const file = this.files[0]
-    const fileType = file.type
-
-    // Vérifier le type de fichier
-    if (fileType === 'image/jpeg' || fileType === 'image/png') {
-      const reader = new FileReader()
-
-      // Lorsque le fichier est chargé, mettre à jour l'aperçu de l'image
-      reader.onload = function (e) {
-        imagePreview.src = e.target.result
-        imagePreview.style.display = 'block'
-      }
-
-      // Lire le fichier en tant que URL de données
-      reader.readAsDataURL(file)
-    } else {
-      alert('Veuillez sélectionner une image au format JPG ou PNG.')
-      imageInput.value = '' // Réinitialiser l'input file
-    }
-  }
-})
-
-// Sélectionnez tous les boutons "Ajouter une photo" et ajoutez un écouteur d'événements pour ouvrir le modal 2
-document.querySelectorAll('.js-modal2').forEach(button => {
-  button.addEventListener('click', openModal2)
-})

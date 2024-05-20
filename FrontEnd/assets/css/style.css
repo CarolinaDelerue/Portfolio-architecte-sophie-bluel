@@ -133,6 +133,9 @@ table {
   border-spacing: 0;
 }
 /** end reset css**/
+
+
+
 body {
   max-width: 1140px;
   margin: auto;
@@ -361,8 +364,4 @@ footer nav ul {
   border: none;
   color: white;
   margin-top: 2em;
-}
-
-.black-banner {
-  background-color: black;
 }
