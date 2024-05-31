@@ -1,6 +1,6 @@
 
 
-{/* // Fonction pour récupérer les données de l'API */ }
+// Fonction pour récupérer les données de l'API
 
 function fetchDataFromAPI () {
     return fetch('http://localhost:5678/api/works')

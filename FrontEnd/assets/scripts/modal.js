@@ -44,8 +44,8 @@ const closeModal2 = function () {
 }
 
 // Ajouter un écouteur d'événements pour le clic sur le bouton "Ajouter une photo"
-document.querySelectorAll('.js-modal2').forEach(button => {
-  button.addEventListener('click', openModal2)
+document.querySelectorAll('.js-modal2').forEach(a => {
+  a.addEventListener('click', openModal2)
 })
 
 // Sélectionner le formulaire d'ajout de photo
@@ -158,7 +158,7 @@ function displayImagesFromAPI () {
         img.alt = imageData.title
         img.id = imageData.id
 
-        const trash = document.createElement('button')
+        const trash = document.createElement('a')
         const icon = document.createElement('img')
         icon.src = './assets/icons/trash.svg'
 

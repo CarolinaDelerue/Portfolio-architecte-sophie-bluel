@@ -18,10 +18,10 @@
 	<div class="container-modal" id="banner">
 		<div class="container-button-modal">
 			<img src="./assets/icons/modify-white.png" alt="modify button">
-			<button href="#modal1" class="js-modal">Mode édition</button>
+			<a href="#modal1" class="js-modal btn-modal1">Mode édition</a>
 		</div>
-		<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-modal="false">
-			<div class="modal-wrapper js-modal-stop">
+		<div id="modal1" class="modal" aria-hidden="true">
+			<div class="modal-wrapper js-modal-stop" role="dialog">
 				<h1 class="titlemodal" id="titlemodal" aria-labelledby="titlemodal">Galerie photo</h1>
 				<button class="js-modal-close">
 					<span class="close-icon">&#10006;</span>
@@ -29,15 +29,15 @@
 				<div class="modal-content"></div>
 				<div class="separator"></div>
 				<div class="container-button-add">
-					<button href="#modal2" class="js-modal2" id="addPhotoButton">Ajouter une photo</button>
+					<a href="#modal2" class="js-modal2" id="addPhotoButton">Ajouter une photo</a>
 				</div>
 			</div>
-		</aside>
+		</div>
 	</div>
 
 	<!-- Deuxième modal pour ajouter une photo -->
-	<aside id="modal2" class="modal" aria-hidden="true" role="dialog" aria-modal="false">
-		<div class="modal-wrapper js-modal-stop">
+	<div id="modal2" class="modal" aria-hidden="true">
+		<div class="modal-wrapper js-modal-stop" role="dialog">
 			<h1 class="titlemodal" id="titlemodal2" aria-labelledby="titlemodal">Ajout photo</h1>
 			<button class="js-modal-close">
 				<span class="close-icon">&#10006;</span>
@@ -50,8 +50,7 @@
 							style="width: 129px; height: 193px; object-fit: cover;">
 						<label class="imagePreviewLabel">
 							<span>+ Ajouter photo</span>
-							<input class="addImgButton" type="file" id="image" name="image" accept="image/*" required
-								placeholder="">
+							<input class="addImgButton" type="file" id="image" name="image" accept="image/*" required>
 						</label>
 						<p id="formatText">Formats autorisés : jpg, png. Taille maximale : 4 Mo</p>
 					</div>
@@ -60,6 +59,7 @@
 
 					<label for="category">Catégorie</label>
 					<select id="category" name="category" required>
+						<option value="">Sélectionner une catégorie</option>
 						<!-- Les catégories seront ajoutées dynamiquement ici -->
 					</select>
 					<div class="separator"></div>
@@ -69,7 +69,7 @@
 				</form>
 			</div>
 		</div>
-	</aside>
+	</div>
 
 	<header>
 		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
@@ -103,7 +103,7 @@
 				<h2>Mes Projets</h2>
 				<div class="container-modify-btn">
 					<img src="./assets/icons/modify-black.png" alt="modify button">
-					<p class="js-modal" href="#modal1">modifier</p>
+					<a class="js-modal" href="#modal1">modifier</a>
 				</div>
 			</div>
 			<div class="container-filter-button">
@@ -121,7 +121,7 @@
 				<label for="name">Nom</label>
 				<input type="text" name="name" id="name">
 				<label for="email">Email</label>
-				<input type="email name=" email" id="email">
+				<input type="email" name="email" id="email">
 				<label for="message">Message</label>
 				<textarea name="message" id="message" cols="30" rows="10"></textarea>
 				<div class="container-sendButton">

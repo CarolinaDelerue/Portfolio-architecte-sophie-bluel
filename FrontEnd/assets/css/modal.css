@@ -1,4 +1,8 @@
 /* Modal */
+a {
+  text-decoration: none;
+  color: inherit;
+}
 
 input {
   background-color: #fff;
@@ -12,6 +16,10 @@ select {
   box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
   border: none;
   height: 30px;
+}
+
+.btn-modal1 {
+  color: white;
 }
 
 .container-title-cross {
@@ -128,11 +136,12 @@ select {
   position: relative;
 }
 
-.modal-content > div > button {
+.modal-content > div > a {
   position: absolute;
   top: 4px;
   right: 8px;
   background-color: black;
+  padding: 4px;
 }
 
 .modal-content > div > img {
