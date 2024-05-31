@@ -63,7 +63,7 @@ select {
 
 .modal {
   position: fixed;
-  display: none; /* Initialement caché */
+  display: none;
   align-items: center;
   justify-content: center;
   left: 0;
@@ -71,7 +71,7 @@ select {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
-  z-index: 1000; /* Assurez-vous que la modale est au-dessus des autres éléments */
+  z-index: 1000;
 }
 
 .titlemodal {
@@ -93,10 +93,10 @@ select {
   max-height: calc(100vh - 20px);
   width: 630px;
   padding: 20px;
-  position: absolute; /* Utilisez absolute pour le centrage */
+  position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* Centrage horizontal et vertical */
+  transform: translate(-50%, -50%);
   border-radius: 10px;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
@@ -109,11 +109,11 @@ select {
 }
 
 .close-icon {
-  font-size: 20px; /* Taille de la croix */
-  color: #555; /* Couleur de la croix */
-  position: absolute; /* Position absolue par rapport à la modale */
-  top: 10px; /* Espacement du haut de la modale */
-  right: 10px; /* Espacement de la droite de la modale */
+  font-size: 20px;
+  color: #555;
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
 .modal-content {
@@ -232,18 +232,16 @@ select {
   align-items: center;
 }
 
-/* Style du bouton par défaut */
 #uploadButton {
   background-color: gray;
   color: white;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
-  cursor: not-allowed; /* Désactiver le curseur pour l'état initial */
+  cursor: not-allowed;
 }
 
-/* Style du bouton lorsqu'une image est téléchargée */
 #uploadButton.active {
   background-color: #1d6154;
-  cursor: pointer; /* Changer le curseur pour pointer lorsqu'il est actif */
+  cursor: pointer;
 }
